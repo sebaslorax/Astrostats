@@ -41,11 +41,11 @@ export function TeamList() {
   const handleSaveEdit = () => {
     if (editingTeam && newTeamName.trim()) {
       updateTeam(editingTeam.id, newTeamName.trim());
-      toast({ title: "Success", description: "Team name updated." });
+      toast({ title: "Éxito", description: "Nombre del equipo actualizado." }); // Translated
       setEditingTeam(null);
       setNewTeamName('');
     } else if (!newTeamName.trim()){
-       toast({ title: "Error", description: "Team name cannot be empty.", variant: "destructive" });
+       toast({ title: "Error", description: "El nombre del equipo no puede estar vacío.", variant: "destructive" }); // Translated
     }
   };
 
@@ -75,7 +75,7 @@ export function TeamList() {
   }
 
   if (teams.length === 0) {
-    return <p className="text-muted-foreground text-center mt-8">No teams created yet. Add a team to get started!</p>;
+    return <p className="text-muted-foreground text-center mt-8">Aún no se han creado equipos. ¡Añade un equipo para empezar!</p>; // Translated
   }
 
   return (
@@ -86,7 +86,7 @@ export function TeamList() {
             <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
               <div className="flex-1 mr-4">
                  <CardTitle className="text-lg font-semibold truncate text-foreground">{team.name}</CardTitle>
-                 <CardDescription className="text-xs text-muted-foreground">Team ID: {team.id.substring(0, 8)}...</CardDescription>
+                 <CardDescription className="text-xs text-muted-foreground">ID Equipo: {team.id.substring(0, 8)}...</CardDescription> {/* Translated */}
               </div>
               <UserGroupIcon className="h-6 w-6 text-accent" />
             </CardHeader>
@@ -94,28 +94,28 @@ export function TeamList() {
               {/* Add more team details here later if needed, like player count */}
               <div className="flex space-x-2 mt-auto">
                  <Link href={`/teams/${team.id}`} passHref>
-                    <Button size="sm" variant="outline" className="flex-1">View Players</Button>
+                    <Button size="sm" variant="outline" className="flex-1">Ver Jugadores</Button> {/* Translated */}
                  </Link>
-                <Button size="sm" variant="ghost" onClick={() => handleEditClick(team)} aria-label="Edit Team">
+                <Button size="sm" variant="ghost" onClick={() => handleEditClick(team)} aria-label="Editar Equipo"> {/* Translated */}
                    <Edit className="h-4 w-4" />
                 </Button>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <Button size="sm" variant="ghost" className="text-destructive hover:bg-destructive/10 hover:text-destructive" aria-label="Delete Team">
+                    <Button size="sm" variant="ghost" className="text-destructive hover:bg-destructive/10 hover:text-destructive" aria-label="Eliminar Equipo"> {/* Translated */}
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                      <AlertDialogTitle>¿Estás seguro?</AlertDialogTitle> {/* Translated */}
                       <AlertDialogDescription>
-                        This action cannot be undone. This will permanently delete the team "{team.name}" and all associated player data.
+                        Esta acción no se puede deshacer. Esto eliminará permanentemente el equipo "{team.name}" y todos los datos de jugadores asociados. {/* Translated */}
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogCancel>Cancelar</AlertDialogCancel> {/* Translated */}
                       <AlertDialogAction onClick={() => removeTeam(team.id)} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-                        Delete Team
+                        Eliminar Equipo {/* Translated */}
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
@@ -130,27 +130,27 @@ export function TeamList() {
       <Dialog open={!!editingTeam} onOpenChange={(isOpen) => !isOpen && setEditingTeam(null)}>
         <DialogContent className="sm:max-w-[425px] bg-card border-border">
           <DialogHeader>
-            <DialogTitle>Edit Team Name</DialogTitle>
+            <DialogTitle>Editar Nombre del Equipo</DialogTitle> {/* Translated */}
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="edit-team-name" className="text-right">
-                Name
+                Nombre {/* Translated */}
               </Label>
               <Input
                 id="edit-team-name"
                 value={newTeamName}
                 onChange={(e) => setNewTeamName(e.target.value)}
                 className="col-span-3"
-                placeholder="Enter new team name"
+                placeholder="Introduce el nuevo nombre del equipo" // Translated
               />
             </div>
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline" onClick={() => setEditingTeam(null)}>Cancel</Button>
+              <Button variant="outline" onClick={() => setEditingTeam(null)}>Cancelar</Button> {/* Translated */}
             </DialogClose>
-            <Button onClick={handleSaveEdit}>Save Changes</Button>
+            <Button onClick={handleSaveEdit}>Guardar Cambios</Button> {/* Translated */}
           </DialogFooter>
         </DialogContent>
       </Dialog>

@@ -8,7 +8,7 @@ export function Header() {
         <Link href="/" className="mr-6 flex items-center space-x-2">
           <RocketIcon className="h-6 w-6 text-primary" /> {/* Use custom icon */}
           <span className="font-bold sm:inline-block text-foreground">
-            AstroStats
+            AstroStats {/* Keep brand name */}
           </span>
         </Link>
         {/* Add navigation or user controls here if needed in the future */}

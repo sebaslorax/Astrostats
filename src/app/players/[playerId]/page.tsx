@@ -55,10 +55,10 @@ export default function PlayerPage() {
     return (
         <MainLayout>
              <Button variant="ghost" onClick={() => router.back()} className="mb-4">
-                <ArrowLeft className="mr-2 h-4 w-4" /> Back
+                <ArrowLeft className="mr-2 h-4 w-4" /> Volver {/* Translated */}
             </Button>
-            <h1 className="text-2xl font-bold text-destructive">Player not found</h1>
-            <p className="text-muted-foreground">The requested player does not exist.</p>
+            <h1 className="text-2xl font-bold text-destructive">Jugador no encontrado</h1> {/* Translated */}
+            <p className="text-muted-foreground">El jugador solicitado no existe.</p> {/* Translated */}
         </MainLayout>
     );
   }
@@ -71,7 +71,7 @@ export default function PlayerPage() {
          onClick={() => router.push(player?.teamId ? `/teams/${player.teamId}` : '/')}
          className="mb-4 text-accent hover:text-accent-foreground hover:bg-accent/10"
       >
-        <ArrowLeft className="mr-2 h-4 w-4" /> Back to {team?.name || 'Team'}
+        <ArrowLeft className="mr-2 h-4 w-4" /> Volver a {team?.name || 'Equipo'} {/* Translated */}
       </Button>
        <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold tracking-tight text-foreground">
@@ -86,16 +86,16 @@ export default function PlayerPage() {
          {/* Player Info Card */}
          <Card className="md:col-span-1 bg-card border-border self-start">
             <CardHeader>
-                <CardTitle>Player Details</CardTitle>
-                <CardDescription>Current information on record.</CardDescription>
+                <CardTitle>Detalles del Jugador</CardTitle> {/* Translated */}
+                <CardDescription>Información actual registrada.</CardDescription> {/* Translated */}
             </CardHeader>
             <CardContent className="space-y-3 text-sm">
-               <p><strong>Team:</strong> {team?.name || 'N/A'}</p>
-               <p><strong>Date of Birth:</strong> {player?.dob ? new Date(player.dob).toLocaleDateString() : 'N/A'} ({calculateAge(player?.dob) ?? 'N/A'} years)</p>
-               <p><strong>Sex:</strong> {player?.sex || 'N/A'}</p>
-               <p><strong>Height:</strong> {player?.height ? `${player.height} cm` : 'N/A'}</p>
-               <p><strong>Weight:</strong> {player?.weight ? `${player.weight} kg` : 'N/A'}</p>
-               <p><strong>Player ID:</strong> {player?.id.substring(0, 8)}...</p>
+               <p><strong>Equipo:</strong> {team?.name || 'N/A'}</p> {/* Translated */}
+               <p><strong>Fecha de Nacimiento:</strong> {player?.dob ? new Date(player.dob).toLocaleDateString('es-ES') : 'N/A'} ({calculateAge(player?.dob) ?? 'N/A'} años)</p> {/* Translated, added Spanish locale */}
+               <p><strong>Sexo:</strong> {player?.sex || 'N/A'}</p>
+               <p><strong>Altura:</strong> {player?.height ? `${player.height} cm` : 'N/A'}</p> {/* Translated */}
+               <p><strong>Peso:</strong> {player?.weight ? `${player.weight} kg` : 'N/A'}</p> {/* Translated */}
+               <p><strong>ID Jugador:</strong> {player?.id.substring(0, 8)}...</p> {/* Translated */}
                  {/* Edit Button could go here */}
             </CardContent>
          </Card>

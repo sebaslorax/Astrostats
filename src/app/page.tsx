@@ -7,7 +7,7 @@ export default function HomePage() {
   return (
     <MainLayout>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">Your Teams</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">Tus Equipos</h1> {/* Translated */}
         <AddTeamDialog />
       </div>
       <Separator className="mb-8 bg-border/50" />

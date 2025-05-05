@@ -12,7 +12,7 @@ export interface Player {
   firstName: string;
   lastName: string;
   dob: string; // ISO string date
-  sex: 'Male' | 'Female' | 'Other' | ''; // Allow empty initial value
+  sex: 'Masculino' | 'Femenino' | 'Otro' | ''; // Allow empty initial value, translated
   height: number | ''; // In cm, allow empty
   weight: number | ''; // In kg, allow empty
   teamId: string; // ID of the team they belong to

@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/chart"; // Use shadcn/ui chart components
 import type { JumpTestData } from "@/lib/types";
 import { format } from 'date-fns';
+import { es } from 'date-fns/locale'; // Import Spanish locale
 
 interface PlayerJumpChartProps {
   jumpData: JumpTestData[];
@@ -28,7 +29,7 @@ interface PlayerJumpChartProps {
 const processChartData = (data: JumpTestData[]) => {
   return data
     .map(item => ({
-      date: format(new Date(item.date), 'MMM dd'), // Format date for X-axis
+      date: format(new Date(item.date), 'dd MMM', { locale: es }), // Format date for X-axis in Spanish
       flightTime: item.flightTime,
       jumpHeight: item.jumpHeight,
       repetitionIndex: item.repetitionIndex,
@@ -39,10 +40,10 @@ const processChartData = (data: JumpTestData[]) => {
 
 
 const chartConfig = {
-  flightTime: { label: "Flight Time", color: "hsl(var(--chart-1))" },
-  jumpHeight: { label: "Jump Height", color: "hsl(var(--chart-2))" },
-  repetitionIndex: { label: "Repetition Index", color: "hsl(var(--chart-3))" },
-  contactTime: { label: "Contact Time", color: "hsl(var(--chart-4))" }, // Added color for contact time
+  flightTime: { label: "Tiempo Vuelo", color: "hsl(var(--chart-1))" }, // Translated
+  jumpHeight: { label: "Altura Salto", color: "hsl(var(--chart-2))" }, // Translated
+  repetitionIndex: { label: "Índice Rep.", color: "hsl(var(--chart-3))" }, // Translated (Abbreviated)
+  contactTime: { label: "Tiempo Contacto", color: "hsl(var(--chart-4))" }, // Translated
 } satisfies React.ComponentProps<typeof ChartContainer>["config"];
 
 
@@ -53,11 +54,11 @@ export function PlayerJumpChart({ jumpData }: PlayerJumpChartProps) {
     return (
       <Card className="bg-card border-border">
         <CardHeader>
-          <CardTitle>Jump Data History</CardTitle>
-          <CardDescription>No jump test data available for this player yet.</CardDescription>
+          <CardTitle>Historial de Datos de Salto</CardTitle> {/* Translated */}
+          <CardDescription>Aún no hay datos de pruebas de salto disponibles para este jugador.</CardDescription> {/* Translated */}
         </CardHeader>
         <CardContent className="flex items-center justify-center h-64">
-            <p className="text-muted-foreground">Add jump data to see the chart.</p>
+            <p className="text-muted-foreground">Añade datos de salto para ver el gráfico.</p> {/* Translated */}
         </CardContent>
       </Card>
     );
@@ -70,8 +71,8 @@ export function PlayerJumpChart({ jumpData }: PlayerJumpChartProps) {
   return (
     <Card className="bg-card border-border">
       <CardHeader>
-        <CardTitle>Jump Data History</CardTitle>
-        <CardDescription>Showing recent jump test results.</CardDescription>
+        <CardTitle>Historial de Datos de Salto</CardTitle> {/* Translated */}
+        <CardDescription>Mostrando los resultados recientes de las pruebas de salto.</CardDescription> {/* Translated */}
       </CardHeader>
       <CardContent>
          <ChartContainer config={chartConfig} className="aspect-video h-[350px] w-full">
@@ -105,7 +106,7 @@ export function PlayerJumpChart({ jumpData }: PlayerJumpChartProps) {
          <div className="flex gap-2 font-medium leading-none text-muted-foreground">
             {/* Optionally show trend indicators or summary stats */}
             {/* <TrendingUp className="h-4 w-4" /> Overall trend calculation could go here */}
-            Data shown chronologically. Hover over bars for details.
+            Datos mostrados cronológicamente. Pasa el cursor sobre las barras para ver detalles. {/* Translated */}
          </div>
       </CardFooter>
     </Card>

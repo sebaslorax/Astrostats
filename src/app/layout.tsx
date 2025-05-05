@@ -10,8 +10,8 @@ const geistSans = GeistSans;
 const geistMono = GeistMono;
 
 export const metadata: Metadata = {
-  title: 'AstroStats',
-  description: 'Futuristic Soccer Player Performance Tracker',
+  title: 'AstroStats', // Keep AstroStats as the brand name
+  description: 'Rastreador Futurista de Rendimiento de Jugadores de Fútbol', // Translated description
 };
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark"> {/* Apply dark theme class */}
+    <html lang="es" className="dark"> {/* Set language to Spanish */}
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",

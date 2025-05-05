@@ -59,7 +59,7 @@ export function PlayerList({ teamId }: PlayerListProps) {
   }
 
   if (players.length === 0) {
-    return <p className="text-muted-foreground text-center mt-8">No players added to this team yet.</p>;
+    return <p className="text-muted-foreground text-center mt-8">Aún no se han añadido jugadores a este equipo.</p>; // Translated
   }
 
   return (
@@ -70,7 +70,7 @@ export function PlayerList({ teamId }: PlayerListProps) {
              <div className="flex-1 mr-4">
                 <CardTitle className="text-lg font-semibold truncate text-foreground">{player.firstName} {player.lastName}</CardTitle>
                  <CardDescription className="text-xs text-muted-foreground">
-                   Age: {calculateAge(player.dob) ?? 'N/A'} | {player.sex} | H: {player.height || 'N/A'}cm | W: {player.weight || 'N/A'}kg
+                   Edad: {calculateAge(player.dob) ?? 'N/A'} | {player.sex} | A: {player.height || 'N/A'}cm | P: {player.weight || 'N/A'}kg {/* Translated (Age, H, W) */}
                 </CardDescription>
              </div>
             <UserIcon className="h-6 w-6 text-accent" />
@@ -78,7 +78,7 @@ export function PlayerList({ teamId }: PlayerListProps) {
           <CardContent className="pt-4 flex-grow">
             {/* Maybe show last test date or a mini chart preview here later */}
              <p className="text-sm text-muted-foreground">
-                Jump Tests Recorded: {player.jumpData?.length || 0}
+                Pruebas de Salto Registradas: {player.jumpData?.length || 0} {/* Translated */}
              </p>
           </CardContent>
            <CardFooter className="flex justify-end space-x-1 pt-4">
@@ -86,28 +86,28 @@ export function PlayerList({ teamId }: PlayerListProps) {
               <AddJumpDataDialog player={player} />
 
               <Link href={`/players/${player.id}`} passHref>
-                <Button size="icon" variant="ghost" title="View Player Details">
+                <Button size="icon" variant="ghost" title="Ver Detalles del Jugador"> {/* Translated */}
                   <Eye className="h-4 w-4" />
                 </Button>
               </Link>
-              {/* <Button size="icon" variant="ghost" title="Edit Player" disabled> <Edit className="h-4 w-4" /> </Button> */}
+              {/* <Button size="icon" variant="ghost" title="Editar Jugador" disabled> <Edit className="h-4 w-4" /> </Button> */} {/* Translated title */}
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                   <Button size="icon" variant="ghost" className="text-destructive hover:bg-destructive/10 hover:text-destructive" title="Delete Player">
+                   <Button size="icon" variant="ghost" className="text-destructive hover:bg-destructive/10 hover:text-destructive" title="Eliminar Jugador"> {/* Translated */}
                     <Trash2 className="h-4 w-4" />
                   </Button>
                 </AlertDialogTrigger>
                  <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                      <AlertDialogTitle>¿Estás seguro?</AlertDialogTitle> {/* Translated */}
                       <AlertDialogDescription>
-                        This action cannot be undone. This will permanently delete the player "{player.firstName} {player.lastName}" and all their test data.
+                        Esta acción no se puede deshacer. Esto eliminará permanentemente al jugador "{player.firstName} {player.lastName}" y todos sus datos de prueba. {/* Translated */}
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogCancel>Cancelar</AlertDialogCancel> {/* Translated */}
                       <AlertDialogAction onClick={() => removePlayer(player.id)} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-                        Delete Player
+                        Eliminar Jugador {/* Translated */}
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>

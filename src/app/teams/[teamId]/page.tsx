@@ -37,10 +37,10 @@ export default function TeamPage() {
       return (
           <MainLayout>
               <Button variant="ghost" onClick={() => router.back()} className="mb-4">
-                  <ArrowLeft className="mr-2 h-4 w-4" /> Back to Teams
+                  <ArrowLeft className="mr-2 h-4 w-4" /> Volver a Equipos {/* Translated */}
               </Button>
-              <h1 className="text-2xl font-bold text-destructive">Team not found</h1>
-              <p className="text-muted-foreground">The requested team does not exist.</p>
+              <h1 className="text-2xl font-bold text-destructive">Equipo no encontrado</h1> {/* Translated */}
+              <p className="text-muted-foreground">El equipo solicitado no existe.</p> {/* Translated */}
           </MainLayout>
       );
   }
@@ -49,7 +49,7 @@ export default function TeamPage() {
   return (
     <MainLayout>
        <Button variant="ghost" onClick={() => router.push('/')} className="mb-4 text-accent hover:text-accent-foreground hover:bg-accent/10">
-          <ArrowLeft className="mr-2 h-4 w-4" /> Back to All Teams
+          <ArrowLeft className="mr-2 h-4 w-4" /> Volver a Todos los Equipos {/* Translated */}
       </Button>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
@@ -70,4 +70,3 @@ export default function TeamPage() {
 //   // For now, we'll return an empty array as data is in localStorage client-side
 //   return [];
 // }
-

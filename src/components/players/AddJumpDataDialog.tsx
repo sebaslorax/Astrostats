@@ -28,10 +28,10 @@ interface AddJumpDataDialogProps {
 }
 
 const jumpDataFormSchema = z.object({
-  flightTime: z.coerce.number().nonnegative({ message: "Flight Time must be non-negative." }),
-  jumpHeight: z.coerce.number().nonnegative({ message: "Jump Height must be non-negative." }),
-  repetitionIndex: z.coerce.number().nonnegative({ message: "Repetition Index must be non-negative." }),
-  contactTime: z.coerce.number().nonnegative({ message: "Contact Time must be non-negative." }),
+  flightTime: z.coerce.number().nonnegative({ message: "El Tiempo de Vuelo debe ser no negativo." }), // Translated
+  jumpHeight: z.coerce.number().nonnegative({ message: "La Altura de Salto debe ser no negativa." }), // Translated
+  repetitionIndex: z.coerce.number().nonnegative({ message: "El Índice de Repetición debe ser no negativo." }), // Translated
+  contactTime: z.coerce.number().nonnegative({ message: "El Tiempo de Contacto debe ser no negativo." }), // Translated
 });
 
 type JumpDataFormValues = z.infer<typeof jumpDataFormSchema>;
@@ -59,16 +59,16 @@ export function AddJumpDataDialog({ player }: AddJumpDataDialogProps) {
         };
         addJumpData(player.id, jumpDataPayload);
         toast({
-            title: "Success",
-            description: `Jump data added for ${player.firstName} ${player.lastName}.`,
+            title: "Éxito", // Translated
+            description: `Datos de salto añadidos para ${player.firstName} ${player.lastName}.`, // Translated
         });
         form.reset(); // Reset form fields
         setIsOpen(false); // Close dialog
     } catch (error) {
          console.error("Error adding jump data:", error);
          toast({
-            title: "Error",
-            description: "Failed to add jump data. Please try again.",
+            title: "Error", // Translated
+            description: "Error al añadir los datos de salto. Por favor, inténtalo de nuevo.", // Translated
             variant: "destructive",
         });
     }
@@ -77,15 +77,15 @@ export function AddJumpDataDialog({ player }: AddJumpDataDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-         <Button size="icon" variant="ghost" title="Add Jump Data">
+         <Button size="icon" variant="ghost" title="Añadir Datos de Salto"> {/* Translated */}
             <TargetIcon className="h-4 w-4 text-accent" /> {/* Use custom target icon */}
          </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[480px] bg-card border-border">
         <DialogHeader>
-          <DialogTitle>Add Jump Test Data</DialogTitle>
+          <DialogTitle>Añadir Datos de Prueba de Salto</DialogTitle> {/* Translated */}
           <DialogDescription>
-            Enter the measurement values for {player.firstName} {player.lastName}.
+            Introduce los valores de medición para {player.firstName} {player.lastName}. {/* Translated */}
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -95,7 +95,7 @@ export function AddJumpDataDialog({ player }: AddJumpDataDialogProps) {
               name="flightTime"
               render={({ field }) => (
                 <FormItem className="grid grid-cols-4 items-center gap-4">
-                  <FormLabel className="text-right">Flight Time</FormLabel>
+                  <FormLabel className="text-right">Tiempo de Vuelo</FormLabel> {/* Translated */}
                   <FormControl className="col-span-3">
                      <Input type="number" step="0.01" {...field} />
                   </FormControl>
@@ -108,7 +108,7 @@ export function AddJumpDataDialog({ player }: AddJumpDataDialogProps) {
               name="jumpHeight"
               render={({ field }) => (
                 <FormItem className="grid grid-cols-4 items-center gap-4">
-                  <FormLabel className="text-right">Jump Height</FormLabel>
+                  <FormLabel className="text-right">Altura de Salto</FormLabel> {/* Translated */}
                   <FormControl className="col-span-3">
                      <Input type="number" step="0.1" {...field} />
                   </FormControl>
@@ -121,7 +121,7 @@ export function AddJumpDataDialog({ player }: AddJumpDataDialogProps) {
               name="repetitionIndex"
               render={({ field }) => (
                 <FormItem className="grid grid-cols-4 items-center gap-4">
-                  <FormLabel className="text-right">Repetition Index</FormLabel>
+                  <FormLabel className="text-right">Índice Repetición</FormLabel> {/* Translated */}
                   <FormControl className="col-span-3">
                      <Input type="number" step="0.1" {...field} />
                   </FormControl>
@@ -134,7 +134,7 @@ export function AddJumpDataDialog({ player }: AddJumpDataDialogProps) {
               name="contactTime"
               render={({ field }) => (
                 <FormItem className="grid grid-cols-4 items-center gap-4">
-                  <FormLabel className="text-right">Contact Time</FormLabel>
+                  <FormLabel className="text-right">Tiempo Contacto</FormLabel> {/* Translated */}
                   <FormControl className="col-span-3">
                      <Input type="number" step="0.01" {...field} />
                   </FormControl>
@@ -145,9 +145,9 @@ export function AddJumpDataDialog({ player }: AddJumpDataDialogProps) {
 
             <DialogFooter className="mt-4">
                 <DialogClose asChild>
-                    <Button type="button" variant="outline">Cancel</Button>
+                    <Button type="button" variant="outline">Cancelar</Button> {/* Translated */}
                 </DialogClose>
-                <Button type="submit">Save Data</Button>
+                <Button type="submit">Guardar Datos</Button> {/* Translated */}
             </DialogFooter>
           </form>
         </Form>

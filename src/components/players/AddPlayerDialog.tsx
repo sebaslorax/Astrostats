@@ -22,6 +22,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar } from "@/components/ui/calendar";
 import { Calendar as CalendarIcon, PlusCircle } from 'lucide-react';
 import { format } from "date-fns";
+import { es } from 'date-fns/locale'; // Import Spanish locale for date-fns
 import { cn } from "@/lib/utils";
 import { useAstroActions } from '@/lib/store';
 import { useToast } from "@/hooks/use-toast";
@@ -32,12 +33,12 @@ interface AddPlayerDialogProps {
 }
 
 const playerFormSchema = z.object({
-  firstName: z.string().min(1, { message: "First name is required." }),
-  lastName: z.string().min(1, { message: "Last name is required." }),
-  dob: z.date({ required_error: "Date of birth is required." }),
-  sex: z.enum(['Male', 'Female', 'Other'], { required_error: "Sex is required."}),
-  height: z.coerce.number().positive({ message: "Height must be a positive number." }).optional().or(z.literal('')), // Allow empty string initially
-  weight: z.coerce.number().positive({ message: "Weight must be a positive number." }).optional().or(z.literal('')), // Allow empty string initially
+  firstName: z.string().min(1, { message: "El nombre es obligatorio." }), // Translated
+  lastName: z.string().min(1, { message: "El apellido es obligatorio." }), // Translated
+  dob: z.date({ required_error: "La fecha de nacimiento es obligatoria." }), // Translated
+  sex: z.enum(['Masculino', 'Femenino', 'Otro'], { required_error: "El sexo es obligatorio."}), // Translated options and error
+  height: z.coerce.number().positive({ message: "La altura debe ser un número positivo." }).optional().or(z.literal('')), // Translated message
+  weight: z.coerce.number().positive({ message: "El peso debe ser un número positivo." }).optional().or(z.literal('')), // Translated message
 });
 
 type PlayerFormValues = z.infer<typeof playerFormSchema>;
@@ -70,16 +71,16 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
         };
         addPlayer(playerData);
         toast({
-            title: "Success",
-            description: `Player ${data.firstName} ${data.lastName} added successfully.`,
+            title: "Éxito", // Translated
+            description: `Jugador ${data.firstName} ${data.lastName} añadido con éxito.`, // Translated
         });
         form.reset(); // Reset form fields
         setIsOpen(false); // Close dialog
     } catch (error) {
          console.error("Error adding player:", error);
          toast({
-            title: "Error",
-            description: "Failed to add player. Please try again.",
+            title: "Error", // Translated
+            description: "Error al añadir el jugador. Por favor, inténtalo de nuevo.", // Translated
             variant: "destructive",
         });
     }
@@ -90,14 +91,14 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
       <DialogTrigger asChild>
         <Button variant="outline" className="border-accent text-accent hover:bg-accent hover:text-accent-foreground">
           <PlusCircle className="mr-2 h-4 w-4" />
-          Add New Player
+          Añadir Nuevo Jugador {/* Translated */}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[480px] bg-card border-border">
         <DialogHeader>
-          <DialogTitle>Add New Player</DialogTitle>
+          <DialogTitle>Añadir Nuevo Jugador</DialogTitle> {/* Translated */}
           <DialogDescription>
-            Enter the details for the new player.
+            Introduce los detalles del nuevo jugador. {/* Translated */}
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -107,9 +108,9 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
               name="firstName"
               render={({ field }) => (
                 <FormItem className="grid grid-cols-4 items-center gap-4">
-                  <FormLabel className="text-right">First Name</FormLabel>
+                  <FormLabel className="text-right">Nombre</FormLabel> {/* Translated */}
                   <FormControl className="col-span-3">
-                    <Input placeholder="e.g., Lionel" {...field} />
+                    <Input placeholder="ej., Lionel" {...field} /> {/* Translated */}
                   </FormControl>
                   <FormMessage className="col-span-4 text-right" />
                 </FormItem>
@@ -120,9 +121,9 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
               name="lastName"
               render={({ field }) => (
                 <FormItem className="grid grid-cols-4 items-center gap-4">
-                  <FormLabel className="text-right">Last Name</FormLabel>
+                  <FormLabel className="text-right">Apellido</FormLabel> {/* Translated */}
                   <FormControl className="col-span-3">
-                    <Input placeholder="e.g., Messi" {...field} />
+                    <Input placeholder="ej., Messi" {...field} /> {/* Translated */}
                   </FormControl>
                    <FormMessage className="col-span-4 text-right" />
                 </FormItem>
@@ -133,7 +134,7 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
                 name="dob"
                 render={({ field }) => (
                     <FormItem className="grid grid-cols-4 items-center gap-4">
-                    <FormLabel className="text-right">Date of Birth</FormLabel>
+                    <FormLabel className="text-right">Fecha de Nacimiento</FormLabel> {/* Translated */}
                     <Popover>
                         <PopoverTrigger asChild>
                         <FormControl className="col-span-3">
@@ -145,12 +146,13 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
                                 )}
                                 >
                                 <CalendarIcon className="mr-2 h-4 w-4" />
-                                {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
+                                {field.value ? format(field.value, "PPP", { locale: es }) : <span>Elige una fecha</span>} {/* Translated, used Spanish locale */}
                             </Button>
                         </FormControl>
                         </PopoverTrigger>
                         <PopoverContent className="w-auto p-0" align="start">
                         <Calendar
+                            locale={es} // Set Spanish locale for calendar
                             mode="single"
                             selected={field.value}
                             onSelect={field.onChange}
@@ -170,17 +172,17 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
                 name="sex"
                 render={({ field }) => (
                     <FormItem className="grid grid-cols-4 items-center gap-4">
-                        <FormLabel className="text-right">Sex</FormLabel>
+                        <FormLabel className="text-right">Sexo</FormLabel> {/* Translated */}
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl className="col-span-3">
                                 <SelectTrigger>
-                                <SelectValue placeholder="Select sex" />
+                                <SelectValue placeholder="Selecciona sexo" /> {/* Translated */}
                                 </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                                <SelectItem value="Male">Male</SelectItem>
-                                <SelectItem value="Female">Female</SelectItem>
-                                <SelectItem value="Other">Other</SelectItem>
+                                <SelectItem value="Masculino">Masculino</SelectItem> {/* Translated */}
+                                <SelectItem value="Femenino">Femenino</SelectItem> {/* Translated */}
+                                <SelectItem value="Otro">Otro</SelectItem> {/* Translated */}
                             </SelectContent>
                         </Select>
                         <FormMessage className="col-span-4 text-right" />
@@ -192,9 +194,9 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
               name="height"
               render={({ field }) => (
                 <FormItem className="grid grid-cols-4 items-center gap-4">
-                  <FormLabel className="text-right">Height (cm)</FormLabel>
+                  <FormLabel className="text-right">Altura (cm)</FormLabel> {/* Translated */}
                   <FormControl className="col-span-3">
-                     <Input type="number" placeholder="e.g., 170" {...field} />
+                     <Input type="number" placeholder="ej., 170" {...field} /> {/* Translated */}
                   </FormControl>
                    <FormMessage className="col-span-4 text-right" />
                 </FormItem>
@@ -205,9 +207,9 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
               name="weight"
               render={({ field }) => (
                 <FormItem className="grid grid-cols-4 items-center gap-4">
-                  <FormLabel className="text-right">Weight (kg)</FormLabel>
+                  <FormLabel className="text-right">Peso (kg)</FormLabel> {/* Translated */}
                   <FormControl className="col-span-3">
-                     <Input type="number" placeholder="e.g., 68" {...field} />
+                     <Input type="number" placeholder="ej., 68" {...field} /> {/* Translated */}
                   </FormControl>
                    <FormMessage className="col-span-4 text-right" />
                 </FormItem>
@@ -216,9 +218,9 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
 
             <DialogFooter className="mt-4">
                 <DialogClose asChild>
-                    <Button type="button" variant="outline">Cancel</Button>
+                    <Button type="button" variant="outline">Cancelar</Button> {/* Translated */}
                 </DialogClose>
-                <Button type="submit">Add Player</Button>
+                <Button type="submit">Añadir Jugador</Button> {/* Translated */}
             </DialogFooter>
           </form>
         </Form>

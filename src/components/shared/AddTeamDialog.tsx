@@ -27,16 +27,16 @@ export function AddTeamDialog() {
   const handleAddTeam = () => {
     if (!teamName.trim()) {
       toast({
-        title: "Error",
-        description: "Team name cannot be empty.",
+        title: "Error", // Translated
+        description: "El nombre del equipo no puede estar vacío.", // Translated
         variant: "destructive",
       });
       return;
     }
     addTeam(teamName);
     toast({
-      title: "Success",
-      description: `Team "${teamName}" created successfully.`,
+      title: "Éxito", // Translated
+      description: `Equipo "${teamName}" creado con éxito.`, // Translated
     });
     setTeamName(''); // Clear input
     setIsOpen(false); // Close dialog
@@ -47,35 +47,35 @@ export function AddTeamDialog() {
       <DialogTrigger asChild>
         <Button variant="outline" className="border-accent text-accent hover:bg-accent hover:text-accent-foreground">
           <PlusCircle className="mr-2 h-4 w-4" />
-          Create New Team
+          Crear Nuevo Equipo {/* Translated */}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] bg-card border-border">
         <DialogHeader>
-          <DialogTitle>Create New Team</DialogTitle>
+          <DialogTitle>Crear Nuevo Equipo</DialogTitle> {/* Translated */}
           <DialogDescription>
-            Enter the name for the new soccer team.
+            Introduce el nombre para el nuevo equipo de fútbol. {/* Translated */}
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="team-name" className="text-right">
-              Team Name
+              Nombre Equipo {/* Translated */}
             </Label>
             <Input
               id="team-name"
               value={teamName}
               onChange={(e) => setTeamName(e.target.value)}
               className="col-span-3"
-              placeholder="e.g., Galactic Strikers"
+              placeholder="ej., Galactic Strikers" // Translated placeholder
             />
           </div>
         </div>
         <DialogFooter>
           <DialogClose asChild>
-             <Button variant="outline">Cancel</Button>
+             <Button variant="outline">Cancelar</Button> {/* Translated */}
           </DialogClose>
-          <Button onClick={handleAddTeam}>Create Team</Button>
+          <Button onClick={handleAddTeam}>Crear Equipo</Button> {/* Translated */}
         </DialogFooter>
       </DialogContent>
     </Dialog>
