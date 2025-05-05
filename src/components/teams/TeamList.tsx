@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useAstroStore, useAstroActions, useHasHydrated } from '@/lib/store';
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { Trash2, Edit } from 'lucide-react'; // Icons for delete/edit
+import { Trash2, Edit, User } from 'lucide-react'; // Icons for delete/edit/players
 import { UserGroupIcon } from '@/components/icons/UserGroupIcon'; // Custom Icon
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -53,6 +53,7 @@ export function TeamList() {
   if (!hasHydrated || teams === undefined) {
     // Show skeleton loaders while waiting for hydration or if teams is undefined
     return (
+       // Responsive grid: 1 col on mobile, 2 on md, 3 on lg
        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {[...Array(3)].map((_, i) => (
           <Card key={i} className="bg-card border-border transition-shadow duration-300 hover:shadow-lg hover:shadow-accent/20">
@@ -60,10 +61,10 @@ export function TeamList() {
               <Skeleton className="h-6 w-3/4" />
               <Skeleton className="h-8 w-8 rounded-full" />
             </CardHeader>
-            <CardContent>
-              <Skeleton className="h-4 w-1/2" />
-              <div className="flex space-x-2 mt-4">
-                <Skeleton className="h-8 w-16" />
+            <CardContent className="pt-4"> {/* Added padding top */}
+              <Skeleton className="h-4 w-1/2 mb-4" /> {/* Added margin bottom */}
+              <div className="flex justify-between sm:justify-start space-x-2"> {/* Justify between on small */}
+                <Skeleton className="h-8 flex-1 sm:flex-none sm:w-24" /> {/* Flex-1 on small */}
                  <Skeleton className="h-8 w-8" />
                  <Skeleton className="h-8 w-8" />
               </div>
@@ -75,11 +76,12 @@ export function TeamList() {
   }
 
   if (teams.length === 0) {
-    return <p className="text-muted-foreground text-center mt-8">Aún no se han creado equipos. ¡Añade un equipo para empezar!</p>; // Translated
+    return <p className="text-muted-foreground text-center mt-8 px-4">Aún no se han creado equipos. ¡Añade un equipo para empezar!</p>; // Translated and added padding
   }
 
   return (
     <>
+      {/* Responsive grid: 1 col on mobile, 2 on md, 3 on lg */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {teams.map((team) => (
           <Card key={team.id} className="bg-card border-border transition-shadow duration-300 hover:shadow-lg hover:shadow-accent/20 flex flex-col justify-between">
@@ -88,38 +90,44 @@ export function TeamList() {
                  <CardTitle className="text-lg font-semibold truncate text-foreground">{team.name}</CardTitle>
                  <CardDescription className="text-xs text-muted-foreground">ID Equipo: {team.id.substring(0, 8)}...</CardDescription> {/* Translated */}
               </div>
-              <UserGroupIcon className="h-6 w-6 text-accent" />
+              <UserGroupIcon className="h-6 w-6 text-accent flex-shrink-0" /> {/* Prevent icon shrinking */}
             </CardHeader>
-            <CardContent className="pt-4">
-              {/* Add more team details here later if needed, like player count */}
-              <div className="flex space-x-2 mt-auto">
-                 <Link href={`/teams/${team.id}`} passHref>
-                    <Button size="sm" variant="outline" className="flex-1">Ver Jugadores</Button> {/* Translated */}
+            {/* Content and Footer combined for better layout control */}
+            <CardContent className="pt-4 flex flex-col flex-grow justify-end">
+              {/* Buttons section */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 mt-auto">
+                 <Link href={`/teams/${team.id}`} passHref className="flex-grow">
+                    <Button size="sm" variant="outline" className="w-full justify-center"> {/* Full width on mobile */}
+                        <User className="mr-2 h-4 w-4" /> {/* Icon for Players */}
+                        Ver Jugadores
+                    </Button> {/* Translated */}
                  </Link>
-                <Button size="sm" variant="ghost" onClick={() => handleEditClick(team)} aria-label="Editar Equipo"> {/* Translated */}
-                   <Edit className="h-4 w-4" />
-                </Button>
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button size="sm" variant="ghost" className="text-destructive hover:bg-destructive/10 hover:text-destructive" aria-label="Eliminar Equipo"> {/* Translated */}
-                      <Trash2 className="h-4 w-4" />
+                 <div className="flex justify-end space-x-1">
+                    <Button size="sm" variant="ghost" onClick={() => handleEditClick(team)} aria-label="Editar Equipo" className="h-8 w-8 p-0"> {/* Smaller icon button */}
+                      <Edit className="h-4 w-4" />
                     </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>¿Estás seguro?</AlertDialogTitle> {/* Translated */}
-                      <AlertDialogDescription>
-                        Esta acción no se puede deshacer. Esto eliminará permanentemente el equipo "{team.name}" y todos los datos de jugadores asociados. {/* Translated */}
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Cancelar</AlertDialogCancel> {/* Translated */}
-                      <AlertDialogAction onClick={() => removeTeam(team.id)} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-                        Eliminar Equipo {/* Translated */}
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button size="sm" variant="ghost" className="text-destructive hover:bg-destructive/10 hover:text-destructive h-8 w-8 p-0" aria-label="Eliminar Equipo"> {/* Smaller icon button */}
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>¿Estás seguro?</AlertDialogTitle> {/* Translated */}
+                          <AlertDialogDescription>
+                            Esta acción no se puede deshacer. Esto eliminará permanentemente el equipo "{team.name}" y todos los datos de jugadores asociados. {/* Translated */}
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancelar</AlertDialogCancel> {/* Translated */}
+                          <AlertDialogAction onClick={() => removeTeam(team.id)} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                            Eliminar Equipo {/* Translated */}
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                 </div>
               </div>
             </CardContent>
           </Card>
@@ -133,24 +141,24 @@ export function TeamList() {
             <DialogTitle>Editar Nombre del Equipo</DialogTitle> {/* Translated */}
           </DialogHeader>
           <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="edit-team-name" className="text-right">
+            <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-x-4 gap-y-2">
+              <Label htmlFor="edit-team-name" className="sm:text-right">
                 Nombre {/* Translated */}
               </Label>
               <Input
                 id="edit-team-name"
                 value={newTeamName}
                 onChange={(e) => setNewTeamName(e.target.value)}
-                className="col-span-3"
+                className="col-span-1 sm:col-span-3"
                 placeholder="Introduce el nuevo nombre del equipo" // Translated
               />
             </div>
           </div>
-          <DialogFooter>
+          <DialogFooter className="flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 gap-2 sm:gap-0"> {/* Responsive footer */}
             <DialogClose asChild>
-              <Button variant="outline" onClick={() => setEditingTeam(null)}>Cancelar</Button> {/* Translated */}
+              <Button variant="outline" onClick={() => setEditingTeam(null)} className="w-full sm:w-auto">Cancelar</Button> {/* Translated */}
             </DialogClose>
-            <Button onClick={handleSaveEdit}>Guardar Cambios</Button> {/* Translated */}
+            <Button onClick={handleSaveEdit} className="w-full sm:w-auto">Guardar Cambios</Button> {/* Translated */}
           </DialogFooter>
         </DialogContent>
       </Dialog>

@@ -29,7 +29,8 @@ interface PlayerJumpChartProps {
 const processChartData = (data: JumpTestData[]) => {
   return data
     .map(item => ({
-      date: format(new Date(item.date), 'dd MMM', { locale: es }), // Format date for X-axis in Spanish
+      // Use shorter date format for mobile
+      date: format(new Date(item.date), 'dd MMM yy', { locale: es }), // Format date for X-axis in Spanish
       flightTime: item.flightTime,
       jumpHeight: item.jumpHeight,
       repetitionIndex: item.repetitionIndex,
@@ -57,8 +58,8 @@ export function PlayerJumpChart({ jumpData }: PlayerJumpChartProps) {
           <CardTitle>Historial de Datos de Salto</CardTitle> {/* Translated */}
           <CardDescription>Aún no hay datos de pruebas de salto disponibles para este jugador.</CardDescription> {/* Translated */}
         </CardHeader>
-        <CardContent className="flex items-center justify-center h-64">
-            <p className="text-muted-foreground">Añade datos de salto para ver el gráfico.</p> {/* Translated */}
+        <CardContent className="flex items-center justify-center h-48 sm:h-64"> {/* Adjusted height */}
+            <p className="text-muted-foreground text-center px-4">Añade datos de salto para ver el gráfico.</p> {/* Translated */}
         </CardContent>
       </Card>
     );
@@ -72,12 +73,13 @@ export function PlayerJumpChart({ jumpData }: PlayerJumpChartProps) {
     <Card className="bg-card border-border">
       <CardHeader>
         <CardTitle>Historial de Datos de Salto</CardTitle> {/* Translated */}
-        <CardDescription>Mostrando los resultados recientes de las pruebas de salto.</CardDescription> {/* Translated */}
+        <CardDescription className="text-sm">Mostrando los resultados recientes de las pruebas de salto.</CardDescription> {/* Translated, smaller text */}
       </CardHeader>
       <CardContent>
-         <ChartContainer config={chartConfig} className="aspect-video h-[350px] w-full">
+         {/* Adjusted height and aspect ratio for responsiveness */}
+         <ChartContainer config={chartConfig} className="aspect-video h-[250px] sm:h-[300px] lg:h-[350px] w-full">
           <ResponsiveContainer width="100%" height="100%">
-             <BarChart data={chartData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
+             <BarChart data={chartData} margin={{ top: 5, right: 5, left: -20, bottom: 5 }}> {/* Reduced margins */}
                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
                  <XAxis
                     dataKey="date"
@@ -86,23 +88,30 @@ export function PlayerJumpChart({ jumpData }: PlayerJumpChartProps) {
                     tickMargin={8}
                     tickFormatter={(value) => value} // Already formatted
                     stroke="hsl(var(--muted-foreground))"
-                    fontSize={12}
+                    fontSize={10} // Smaller font for axis
+                    // interval={Math.ceil(chartData.length / 5)} // Adjust interval for mobile if needed
                  />
-                  <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} tickLine={false} axisLine={false} />
+                  <YAxis
+                    stroke="hsl(var(--muted-foreground))"
+                    fontSize={10} // Smaller font for axis
+                    tickLine={false}
+                    axisLine={false}
+                    tickMargin={5} // Adjust margin
+                  />
                  <ChartTooltipPrimitive
                     cursor={false} // Disable default cursor
                     content={<ChartTooltipContent indicator="dot" hideLabel />} // Use shadcn tooltip
                  />
-                 <Legend content={<ChartLegendContent />} />
-                 {activeDataKeys.includes("flightTime") && <Bar dataKey="flightTime" fill="var(--color-flightTime)" radius={4} />}
-                 {activeDataKeys.includes("jumpHeight") && <Bar dataKey="jumpHeight" fill="var(--color-jumpHeight)" radius={4} />}
-                 {activeDataKeys.includes("repetitionIndex") && <Bar dataKey="repetitionIndex" fill="var(--color-repetitionIndex)" radius={4} />}
-                 {activeDataKeys.includes("contactTime") && <Bar dataKey="contactTime" fill="var(--color-contactTime)" radius={4} />}
+                 <Legend content={<ChartLegendContent nameKey="label" />} wrapperStyle={{ fontSize: '10px', paddingTop: '10px' }} /> {/* Smaller legend */}
+                 {activeDataKeys.includes("flightTime") && <Bar dataKey="flightTime" fill="var(--color-flightTime)" radius={2} barSize={15} />} {/* Smaller radius and bar size */}
+                 {activeDataKeys.includes("jumpHeight") && <Bar dataKey="jumpHeight" fill="var(--color-jumpHeight)" radius={2} barSize={15}/>}
+                 {activeDataKeys.includes("repetitionIndex") && <Bar dataKey="repetitionIndex" fill="var(--color-repetitionIndex)" radius={2} barSize={15}/>}
+                 {activeDataKeys.includes("contactTime") && <Bar dataKey="contactTime" fill="var(--color-contactTime)" radius={2} barSize={15}/>}
             </BarChart>
           </ResponsiveContainer>
         </ChartContainer>
       </CardContent>
-       <CardFooter className="flex-col items-start gap-2 text-sm">
+       <CardFooter className="flex-col items-start gap-2 text-xs sm:text-sm p-4 sm:p-6"> {/* Smaller padding and text on mobile */}
          <div className="flex gap-2 font-medium leading-none text-muted-foreground">
             {/* Optionally show trend indicators or summary stats */}
             {/* <TrendingUp className="h-4 w-4" /> Overall trend calculation could go here */}

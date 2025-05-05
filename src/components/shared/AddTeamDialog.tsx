@@ -53,20 +53,21 @@ export function AddTeamDialog() {
       <DialogContent className="sm:max-w-[425px] bg-card border-border">
         <DialogHeader>
           <DialogTitle>Crear Nuevo Equipo</DialogTitle> {/* Translated */}
-          <DialogDescription>
+          <DialogDescription className="text-sm"> {/* Smaller description text */}
             Introduce el nombre para el nuevo equipo de fútbol. {/* Translated */}
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="team-name" className="text-right">
+          {/* Updated grid layout for responsiveness */}
+          <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-x-4 gap-y-2">
+            <Label htmlFor="team-name" className="sm:text-right">
               Nombre Equipo {/* Translated */}
             </Label>
             <Input
               id="team-name"
               value={teamName}
               onChange={(e) => setTeamName(e.target.value)}
-              className="col-span-3"
+              className="col-span-1 sm:col-span-3" // Adjusted column span
               placeholder="ej., Galactic Strikers" // Translated placeholder
             />
           </div>

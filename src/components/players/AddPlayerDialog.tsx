@@ -97,7 +97,7 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
       <DialogContent className="sm:max-w-[480px] bg-card border-border">
         <DialogHeader>
           <DialogTitle>Añadir Nuevo Jugador</DialogTitle> {/* Translated */}
-          <DialogDescription>
+          <DialogDescription className="text-sm"> {/* Smaller description text */}
             Introduce los detalles del nuevo jugador. {/* Translated */}
           </DialogDescription>
         </DialogHeader>
@@ -107,12 +107,12 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
               control={form.control}
               name="firstName"
               render={({ field }) => (
-                <FormItem className="grid grid-cols-4 items-center gap-4">
-                  <FormLabel className="text-right">Nombre</FormLabel> {/* Translated */}
-                  <FormControl className="col-span-3">
+                <FormItem className="grid grid-cols-1 sm:grid-cols-4 items-center gap-x-4 gap-y-2">
+                  <FormLabel className="sm:text-right">Nombre</FormLabel> {/* Translated */}
+                  <FormControl className="col-span-1 sm:col-span-3">
                     <Input placeholder="ej., Lionel" {...field} /> {/* Translated */}
                   </FormControl>
-                  <FormMessage className="col-span-4 text-right" />
+                  <FormMessage className="col-span-1 sm:col-span-4 sm:text-right" />
                 </FormItem>
               )}
             />
@@ -120,12 +120,12 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
               control={form.control}
               name="lastName"
               render={({ field }) => (
-                <FormItem className="grid grid-cols-4 items-center gap-4">
-                  <FormLabel className="text-right">Apellido</FormLabel> {/* Translated */}
-                  <FormControl className="col-span-3">
+                <FormItem className="grid grid-cols-1 sm:grid-cols-4 items-center gap-x-4 gap-y-2">
+                  <FormLabel className="sm:text-right">Apellido</FormLabel> {/* Translated */}
+                  <FormControl className="col-span-1 sm:col-span-3">
                     <Input placeholder="ej., Messi" {...field} /> {/* Translated */}
                   </FormControl>
-                   <FormMessage className="col-span-4 text-right" />
+                   <FormMessage className="col-span-1 sm:col-span-4 sm:text-right" />
                 </FormItem>
               )}
             />
@@ -133,11 +133,11 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
                 control={form.control}
                 name="dob"
                 render={({ field }) => (
-                    <FormItem className="grid grid-cols-4 items-center gap-4">
-                    <FormLabel className="text-right">Fecha de Nacimiento</FormLabel> {/* Translated */}
+                    <FormItem className="grid grid-cols-1 sm:grid-cols-4 items-center gap-x-4 gap-y-2">
+                    <FormLabel className="sm:text-right">Fecha de Nacimiento</FormLabel> {/* Translated */}
                     <Popover>
                         <PopoverTrigger asChild>
-                        <FormControl className="col-span-3">
+                        <FormControl className="col-span-1 sm:col-span-3">
                             <Button
                                 variant={"outline"}
                                 className={cn(
@@ -163,7 +163,7 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
                         />
                         </PopoverContent>
                     </Popover>
-                    <FormMessage className="col-span-4 text-right" />
+                    <FormMessage className="col-span-1 sm:col-span-4 sm:text-right" />
                     </FormItem>
                 )}
              />
@@ -171,10 +171,10 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
                 control={form.control}
                 name="sex"
                 render={({ field }) => (
-                    <FormItem className="grid grid-cols-4 items-center gap-4">
-                        <FormLabel className="text-right">Sexo</FormLabel> {/* Translated */}
+                    <FormItem className="grid grid-cols-1 sm:grid-cols-4 items-center gap-x-4 gap-y-2">
+                        <FormLabel className="sm:text-right">Sexo</FormLabel> {/* Translated */}
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl className="col-span-3">
+                            <FormControl className="col-span-1 sm:col-span-3">
                                 <SelectTrigger>
                                 <SelectValue placeholder="Selecciona sexo" /> {/* Translated */}
                                 </SelectTrigger>
@@ -185,7 +185,7 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
                                 <SelectItem value="Otro">Otro</SelectItem> {/* Translated */}
                             </SelectContent>
                         </Select>
-                        <FormMessage className="col-span-4 text-right" />
+                        <FormMessage className="col-span-1 sm:col-span-4 sm:text-right" />
                     </FormItem>
                 )}
              />
@@ -193,12 +193,12 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
               control={form.control}
               name="height"
               render={({ field }) => (
-                <FormItem className="grid grid-cols-4 items-center gap-4">
-                  <FormLabel className="text-right">Altura (cm)</FormLabel> {/* Translated */}
-                  <FormControl className="col-span-3">
+                <FormItem className="grid grid-cols-1 sm:grid-cols-4 items-center gap-x-4 gap-y-2">
+                  <FormLabel className="sm:text-right">Altura (cm)</FormLabel> {/* Translated */}
+                  <FormControl className="col-span-1 sm:col-span-3">
                      <Input type="number" placeholder="ej., 170" {...field} /> {/* Translated */}
                   </FormControl>
-                   <FormMessage className="col-span-4 text-right" />
+                   <FormMessage className="col-span-1 sm:col-span-4 sm:text-right" />
                 </FormItem>
               )}
             />
@@ -206,21 +206,21 @@ export function AddPlayerDialog({ teamId }: AddPlayerDialogProps) {
               control={form.control}
               name="weight"
               render={({ field }) => (
-                <FormItem className="grid grid-cols-4 items-center gap-4">
-                  <FormLabel className="text-right">Peso (kg)</FormLabel> {/* Translated */}
-                  <FormControl className="col-span-3">
+                <FormItem className="grid grid-cols-1 sm:grid-cols-4 items-center gap-x-4 gap-y-2">
+                  <FormLabel className="sm:text-right">Peso (kg)</FormLabel> {/* Translated */}
+                  <FormControl className="col-span-1 sm:col-span-3">
                      <Input type="number" placeholder="ej., 68" {...field} /> {/* Translated */}
                   </FormControl>
-                   <FormMessage className="col-span-4 text-right" />
+                   <FormMessage className="col-span-1 sm:col-span-4 sm:text-right" />
                 </FormItem>
               )}
             />
 
-            <DialogFooter className="mt-4">
+            <DialogFooter className="mt-4 flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 gap-2 sm:gap-0"> {/* Responsive footer */}
                 <DialogClose asChild>
-                    <Button type="button" variant="outline">Cancelar</Button> {/* Translated */}
+                    <Button type="button" variant="outline" className="w-full sm:w-auto">Cancelar</Button> {/* Translated */}
                 </DialogClose>
-                <Button type="submit">Añadir Jugador</Button> {/* Translated */}
+                <Button type="submit" className="w-full sm:w-auto">Añadir Jugador</Button> {/* Translated */}
             </DialogFooter>
           </form>
         </Form>

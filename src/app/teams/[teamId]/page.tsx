@@ -51,7 +51,8 @@ export default function TeamPage() {
        <Button variant="ghost" onClick={() => router.push('/')} className="mb-4 text-accent hover:text-accent-foreground hover:bg-accent/10">
           <ArrowLeft className="mr-2 h-4 w-4" /> Volver a Todos los Equipos {/* Translated */}
       </Button>
-      <div className="flex justify-between items-center mb-6">
+      {/* Responsive header: stack on small screens, space-between on larger */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 sm:gap-0">
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
             {team?.name || <Skeleton className="h-8 w-48 inline-block" />} {/* Show skeleton if team name is loading */}
         </h1>

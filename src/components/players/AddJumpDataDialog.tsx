@@ -77,14 +77,15 @@ export function AddJumpDataDialog({ player }: AddJumpDataDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-         <Button size="icon" variant="ghost" title="Añadir Datos de Salto"> {/* Translated */}
-            <TargetIcon className="h-4 w-4 text-accent" /> {/* Use custom target icon */}
+         {/* Increased button size slightly for better touch target */}
+         <Button size="icon" variant="ghost" title="Añadir Datos de Salto" className="h-9 w-9"> {/* Translated */}
+            <TargetIcon className="h-5 w-5 text-accent" /> {/* Use custom target icon */}
          </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[480px] bg-card border-border">
         <DialogHeader>
           <DialogTitle>Añadir Datos de Prueba de Salto</DialogTitle> {/* Translated */}
-          <DialogDescription>
+          <DialogDescription className="text-sm"> {/* Smaller description text */}
             Introduce los valores de medición para {player.firstName} {player.lastName}. {/* Translated */}
           </DialogDescription>
         </DialogHeader>
@@ -94,12 +95,12 @@ export function AddJumpDataDialog({ player }: AddJumpDataDialogProps) {
               control={form.control}
               name="flightTime"
               render={({ field }) => (
-                <FormItem className="grid grid-cols-4 items-center gap-4">
-                  <FormLabel className="text-right">Tiempo de Vuelo</FormLabel> {/* Translated */}
-                  <FormControl className="col-span-3">
+                <FormItem className="grid grid-cols-1 sm:grid-cols-4 items-center gap-x-4 gap-y-2">
+                  <FormLabel className="sm:text-right">Tiempo de Vuelo</FormLabel> {/* Translated */}
+                  <FormControl className="col-span-1 sm:col-span-3">
                      <Input type="number" step="0.01" {...field} />
                   </FormControl>
-                  <FormMessage className="col-span-4 text-right" />
+                  <FormMessage className="col-span-1 sm:col-span-4 sm:text-right" />
                 </FormItem>
               )}
             />
@@ -107,12 +108,12 @@ export function AddJumpDataDialog({ player }: AddJumpDataDialogProps) {
               control={form.control}
               name="jumpHeight"
               render={({ field }) => (
-                <FormItem className="grid grid-cols-4 items-center gap-4">
-                  <FormLabel className="text-right">Altura de Salto</FormLabel> {/* Translated */}
-                  <FormControl className="col-span-3">
+                <FormItem className="grid grid-cols-1 sm:grid-cols-4 items-center gap-x-4 gap-y-2">
+                  <FormLabel className="sm:text-right">Altura de Salto</FormLabel> {/* Translated */}
+                  <FormControl className="col-span-1 sm:col-span-3">
                      <Input type="number" step="0.1" {...field} />
                   </FormControl>
-                   <FormMessage className="col-span-4 text-right" />
+                   <FormMessage className="col-span-1 sm:col-span-4 sm:text-right" />
                 </FormItem>
               )}
             />
@@ -120,12 +121,12 @@ export function AddJumpDataDialog({ player }: AddJumpDataDialogProps) {
               control={form.control}
               name="repetitionIndex"
               render={({ field }) => (
-                <FormItem className="grid grid-cols-4 items-center gap-4">
-                  <FormLabel className="text-right">Índice Repetición</FormLabel> {/* Translated */}
-                  <FormControl className="col-span-3">
+                <FormItem className="grid grid-cols-1 sm:grid-cols-4 items-center gap-x-4 gap-y-2">
+                  <FormLabel className="sm:text-right">Índice Repetición</FormLabel> {/* Translated */}
+                  <FormControl className="col-span-1 sm:col-span-3">
                      <Input type="number" step="0.1" {...field} />
                   </FormControl>
-                   <FormMessage className="col-span-4 text-right" />
+                   <FormMessage className="col-span-1 sm:col-span-4 sm:text-right" />
                 </FormItem>
               )}
             />
@@ -133,21 +134,21 @@ export function AddJumpDataDialog({ player }: AddJumpDataDialogProps) {
               control={form.control}
               name="contactTime"
               render={({ field }) => (
-                <FormItem className="grid grid-cols-4 items-center gap-4">
-                  <FormLabel className="text-right">Tiempo Contacto</FormLabel> {/* Translated */}
-                  <FormControl className="col-span-3">
+                <FormItem className="grid grid-cols-1 sm:grid-cols-4 items-center gap-x-4 gap-y-2">
+                  <FormLabel className="sm:text-right">Tiempo Contacto</FormLabel> {/* Translated */}
+                  <FormControl className="col-span-1 sm:col-span-3">
                      <Input type="number" step="0.01" {...field} />
                   </FormControl>
-                   <FormMessage className="col-span-4 text-right" />
+                   <FormMessage className="col-span-1 sm:col-span-4 sm:text-right" />
                 </FormItem>
               )}
             />
 
-            <DialogFooter className="mt-4">
+            <DialogFooter className="mt-4 flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 gap-2 sm:gap-0"> {/* Responsive footer */}
                 <DialogClose asChild>
-                    <Button type="button" variant="outline">Cancelar</Button> {/* Translated */}
+                    <Button type="button" variant="outline" className="w-full sm:w-auto">Cancelar</Button> {/* Translated */}
                 </DialogClose>
-                <Button type="submit">Guardar Datos</Button> {/* Translated */}
+                <Button type="submit" className="w-full sm:w-auto">Guardar Datos</Button> {/* Translated */}
             </DialogFooter>
           </form>
         </Form>

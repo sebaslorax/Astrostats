@@ -30,8 +30,9 @@ export default function PlayerPage() {
         <Skeleton className="h-8 w-1/4 mb-2" />
         <Skeleton className="h-10 w-1/6 mb-6" />
         <Separator className="mb-8" />
-        <div className="grid md:grid-cols-3 gap-6">
-           <Card className="md:col-span-1">
+        {/* Updated grid layout for skeleton */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+           <Card className="lg:col-span-1">
                 <CardHeader>
                      <Skeleton className="h-6 w-3/4 mb-2" />
                      <Skeleton className="h-4 w-1/2" />
@@ -42,7 +43,7 @@ export default function PlayerPage() {
                     <Skeleton className="h-4 w-3/4" />
                 </CardContent>
            </Card>
-            <div className="md:col-span-2">
+            <div className="lg:col-span-2">
                 <Skeleton className="h-96 w-full" />
             </div>
         </div>
@@ -73,7 +74,8 @@ export default function PlayerPage() {
       >
         <ArrowLeft className="mr-2 h-4 w-4" /> Volver a {team?.name || 'Equipo'} {/* Translated */}
       </Button>
-       <div className="flex justify-between items-center mb-6">
+       {/* Responsive header: stack on small screens, space-between on larger */}
+       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 sm:gap-0">
           <h1 className="text-3xl font-bold tracking-tight text-foreground">
             {player?.firstName} {player?.lastName}
           </h1>
@@ -82,12 +84,13 @@ export default function PlayerPage() {
        </div>
        <Separator className="mb-8 bg-border/50" />
 
-      <div className="grid md:grid-cols-3 gap-8">
+      {/* Responsive grid for content */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
          {/* Player Info Card */}
-         <Card className="md:col-span-1 bg-card border-border self-start">
+         <Card className="lg:col-span-1 bg-card border-border self-start">
             <CardHeader>
                 <CardTitle>Detalles del Jugador</CardTitle> {/* Translated */}
-                <CardDescription>Información actual registrada.</CardDescription> {/* Translated */}
+                <CardDescription className="text-sm">Información actual registrada.</CardDescription> {/* Translated, smaller text */}
             </CardHeader>
             <CardContent className="space-y-3 text-sm">
                <p><strong>Equipo:</strong> {team?.name || 'N/A'}</p> {/* Translated */}
@@ -95,13 +98,13 @@ export default function PlayerPage() {
                <p><strong>Sexo:</strong> {player?.sex || 'N/A'}</p>
                <p><strong>Altura:</strong> {player?.height ? `${player.height} cm` : 'N/A'}</p> {/* Translated */}
                <p><strong>Peso:</strong> {player?.weight ? `${player.weight} kg` : 'N/A'}</p> {/* Translated */}
-               <p><strong>ID Jugador:</strong> {player?.id.substring(0, 8)}...</p> {/* Translated */}
+               <p><strong>ID Jugador:</strong> <span className="break-all">{player?.id.substring(0, 8)}...</span></p> {/* Translated, allow word break */}
                  {/* Edit Button could go here */}
             </CardContent>
          </Card>
 
          {/* Jump Data Chart */}
-         <div className="md:col-span-2">
+         <div className="lg:col-span-2">
              {player?.jumpData && <PlayerJumpChart jumpData={player.jumpData} />}
          </div>
       </div>
