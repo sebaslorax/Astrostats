@@ -20,7 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="dark"> {/* Set language to Spanish */}
+    // Removed comment and whitespace from here to prevent hydration errors
+    <html lang="es" className="dark">
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
