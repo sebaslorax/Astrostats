@@ -96,7 +96,7 @@ export function TeamList() {
             <CardContent className="pt-4 flex flex-col flex-grow justify-end">
               {/* Buttons section */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 mt-auto">
-                 <Link href={`/teams/${team.id}`} passHref className="flex-grow">
+                 <Link href={`/teams/${team.id}`} className="flex-grow"> {/* Removed passHref */}
                     <Button size="sm" variant="outline" className="w-full justify-center"> {/* Full width on mobile */}
                         <User className="mr-2 h-4 w-4" /> {/* Icon for Players */}
                         Ver Jugadores

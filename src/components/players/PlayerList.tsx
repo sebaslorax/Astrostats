@@ -90,7 +90,7 @@ export function PlayerList({ teamId }: PlayerListProps) {
               {/* Add Jump Data Button/Dialog Trigger */}
               <AddJumpDataDialog player={player} />
 
-              <Link href={`/players/${player.id}`} passHref>
+              <Link href={`/players/${player.id}`}> {/* Removed passHref */}
                  {/* Adjusted button size */}
                 <Button size="icon" variant="ghost" title="Ver Detalles del Jugador" className="h-9 w-9"> {/* Translated */}
                   <Eye className="h-5 w-5" /> {/* Slightly larger icon */}
